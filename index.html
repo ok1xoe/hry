@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Retro hry</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="stripes"></div>
+    <header>
+        <h1>🕹️ Retro hry</h1>
+        <p>50 her ve stylu ZX Spectra a další klasiky. Všechno běží přímo v prohlížeči.</p>
+        <input id="q" class="search" type="search" placeholder="Hledat hru… (třeba „tetris“ nebo „bomb“)" autocomplete="off">
+    </header>
+    <main>
+        <h2 id="h-zx">ZX Spectrum styl</h2>
+        <div class="grid" id="zx"></div>
+        <h2 id="h-ot">Další hry a výukové programy</h2>
+        <div class="grid" id="ot"></div>
+        <p class="empty" id="empty">Nic nenalezeno.</p>
+    </main>
+    <footer>Hry jsou vlastní zpracování klasických principů, bez převzaté grafiky. Zdrojové kódy jsou na GitHubu (ok1xoe).</footer>
+
+    <script src="js/games.js"></script>
+    <script>
+        (function () {
+            var BASE = 'https://ok1xoe.github.io/';
+            var q = document.getElementById('q');
+
+            function norm(s) { return s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
+
+            function render(list, el, filter) {
+                el.innerHTML = '';
+                var shown = 0;
+                list.forEach(function (g) {
+                    var hay = norm(g[0] + ' ' + g[1] + ' ' + g[2]);
+                    if (filter && hay.indexOf(filter) === -1) { return; }
+                    var a = document.createElement('a');
+                    a.className = 'card';
+                    a.href = BASE + g[0] + '/';
+                    a.innerHTML = '<div class="emoji"></div><div><b></b><span></span></div>';
+                    a.querySelector('.emoji').textContent = g[3];
+                    a.querySelector('b').textContent = g[1];
+                    a.querySelector('span').textContent = g[2];
+                    el.appendChild(a);
+                    shown++;
+                });
+                return shown;
+            }
+
+            function update() {
+                var f = norm(q.value.trim());
+                var n1 = render(window.SPECTRUM, document.getElementById('zx'), f);
+                var n2 = render(window.OTHER, document.getElementById('ot'), f);
+                document.getElementById('h-zx').style.display = n1 ? '' : 'none';
+                document.getElementById('h-ot').style.display = n2 ? '' : 'none';
+                document.getElementById('empty').style.display = n1 + n2 ? 'none' : 'block';
+            }
+
+            q.addEventListener('input', update);
+            update();
+        })();
+    </script>
+</body>
+</html>

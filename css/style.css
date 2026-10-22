@@ -1,0 +1,49 @@
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: #101018;
+  color: #e8e8f0;
+}
+.stripes {
+  height: 10px;
+  background: linear-gradient(90deg, #d70000 0 25%, #d7d700 25% 50%, #00d700 50% 75%, #00d7d7 75%);
+}
+header { padding: 28px 20px 8px; text-align: center; }
+h1 { margin: 0; font-size: clamp(1.8rem, 5vw, 2.8rem); letter-spacing: 0.03em; }
+header p { color: #9a9ab0; margin: 8px 0 16px; }
+.search {
+  width: min(480px, 100%);
+  padding: 10px 14px;
+  font: inherit;
+  color: inherit;
+  background: #1c1c2a;
+  border: 1px solid #34344a;
+  border-radius: 8px;
+}
+main { max-width: 1200px; margin: 0 auto; padding: 8px 16px 48px; }
+h2 { margin: 28px 4px 12px; font-size: 1.2rem; color: #ffd479; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 12px;
+}
+.card {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 14px;
+  text-decoration: none;
+  color: inherit;
+  background: #1a1a28;
+  border: 1px solid #2c2c42;
+  border-radius: 10px;
+  transition: transform .12s, border-color .12s, background .12s;
+}
+.card:hover, .card:focus-visible { transform: translateY(-2px); border-color: #ffd479; background: #20203a; outline: none; }
+.emoji { font-size: 2rem; width: 2.4rem; text-align: center; flex: none; }
+.card b { display: block; }
+.card span { display: block; color: #9a9ab0; font-size: .82rem; margin-top: 2px; }
+.empty { color: #9a9ab0; text-align: center; padding: 30px; display: none; }
+footer { text-align: center; color: #70708a; padding: 0 16px 32px; font-size: .85rem; }
